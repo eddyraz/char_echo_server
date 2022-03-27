@@ -6,18 +6,28 @@ defmodule EchoClient do
 
   """
 
-  @ip_servidor {127, 0, 0, 1}
-
   def iniciar_cliente(puerto) do
-    # {:ok, :socket} = :gen_tcp.connect(host, puerto,[:binary, {:packet, 0}])
-    {:ok, :socket} = :gen_tcp.connect(@ip_servidor, @puerto, [:binary, active: true])
-    ok = :gen_tcp.send(Sock, "Some Data")
+    opciones = [:binary, active: false]
+    {:ok, socket} = :gen_tcp.connect('localhost', puerto ,opciones)
+    ok = :gen_tcp.send(Sock, generador_de_cadenas() <> "\n")
   end
 
-  # def recibir_cadena(cadena) do
-  #  cadena
-  #  recibir_cadena(cadena)
-  # end
+
+
+  def generador_de_cadenas() do
+    :crypto.strong_rand_bytes(Enum.random(0..255)) |> Base.encode64(padding: false)
+
+  end
+
+  def recibir_cadenas(Sock) do
+    {:DATOS, cadena_char} = :gen_tcp.recv(Sock,0)
+    cadena_char
+    recibir_cadenas(Sock)
+  end
+
+  def contador_de_cadenas() do
+    Enum.reduce([1], fn element, sum -> sum + element end)
+  end
 
   def terminar_conexion(Sock) do
     ok = :gen_tcp.close(Sock)
@@ -27,4 +37,5 @@ defmodule EchoClient do
     Process.sleep(segundos)
     IO.puts("La conexion se ha cerrado.")
   end
+
 end

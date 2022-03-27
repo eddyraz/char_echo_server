@@ -19,7 +19,7 @@ defmodule VacuumEchoClient do
     Enum.reduce([1], fn element, sum -> sum + element end)
   end
 
-  def generador_de_cadenas() do
-    :crypto.strong_rand_bytes(Enum.random(0..255)) |> Base.encode64(padding: false)
-  end
+  #def generador_de_cadenas() do
+  #  :crypto.strong_rand_bytes(Enum.random(0..255)) |> Base.encode64(padding: false)
+  #end
 end
