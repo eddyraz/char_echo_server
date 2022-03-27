@@ -1,16 +1,25 @@
 defmodule EchoClient do
 
 
-  def iniciar_cliente(host,puerto) do
-    cliente() ->
-      IP_Servidor = host,
-      {ok, Sock} = gen_tcp:connect(IP_Servidor, puerto,[binary, {packet, 0}]),
-      ok = gen_tcp:send(Sock, "Some Data"),
+  @ip_servidor {127, 0, 0, 1}
+
+  def iniciar_cliente(puerto) do
+
+
+      #{:ok, :socket} = :gen_tcp.connect(host, puerto,[:binary, {:packet, 0}])
+      {:ok, :socket} = :gen_tcp.connect(@ip_servidor, @puerto, [:binary, active: true])
+      ok = :gen_tcp.send(Sock, "Some Data")
   end
 
 
-  def terminar_conexion()do
-    ok = gen_tcp:close(Sock).
+  #def recibir_cadena(cadena) do
+  #  cadena
+  #  recibir_cadena(cadena)
+  #end
+
+
+  def terminar_conexion(Sock) do
+    ok = :gen_tcp.close(Sock)
   end
 
   def dormir_proceso(segundos)do
