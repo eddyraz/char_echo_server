@@ -1,4 +1,6 @@
 defmodule Charserver.MixProject do
+
+
   use Mix.Project
 
   def project do
@@ -26,6 +28,7 @@ defmodule Charserver.MixProject do
       {:websockex, "~> 0.4.3"},
       {:cowlib, "~> 2.11.0"},
       {:ranch, "~> 1.8.0"},
+      {:credo, "~> 1.6", only: [:dev, :test], runtime: false}
     ]
   end
 end

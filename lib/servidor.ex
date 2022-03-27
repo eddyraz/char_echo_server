@@ -9,17 +9,17 @@ defmodule CharEchoServer do
   el caracter especial de salto de linea(ENTER).
   """
 
-  def iniciar(puerto) do
+  def aceptar_conexion(puerto) do
+    {:ok, socket} =
+      :gen_tcp.listen(puerto, [:binary, packet: :line, active: false, reuseaddr: true])
 
-    {:ok, socket} = :gen_tcp.listen(puerto, [:binary, packet: :line, active: false, reuseaddr: true])
     Logger.info("Estamos aceptando conexiones en el puerto #{puerto}")
     {:ok, cliente} = :gen_tcp.accept(socket)
     servir_socket(cliente)
   end
 
-
   defp servir_socket(socket) do
-    socket |> leer_caracteres()  |> escribir_caracteres(socket)
+    socket |> leer_caracteres() |> escribir_caracteres(socket)
     servir_socket(socket)
   end
 

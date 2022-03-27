@@ -1,4 +1,11 @@
 defmodule Stack do
+
+  @moduledoc """
+  Manejador de los workers(clientes)
+  usa para esto el paradigma de Genserver
+
+  """
+
   use GenServer
 
   # Callbacks
