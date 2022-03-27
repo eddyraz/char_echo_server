@@ -4,6 +4,10 @@ defmodule Stack do
   Manejador de los workers(clientes)
   usa para esto el paradigma de Genserver
 
+
+  recibe las peticiones de terminar los workers,
+  y emite creacion(spawning de nuevos workers)
+
   """
 
   use GenServer
