@@ -19,18 +19,24 @@ defmodule CharEchoServer do
   end
 
   defp servir_socket(socket) do
-    socket |> leer_caracteres()  |> escribir_caracteres(socket)
+    socket |> leer_caracteres() |> escribir_caracteres(socket)
     servir_socket(socket)
   end
 
   defp leer_caracteres(socket) do
-    #{:ok, data} = :gen_tcp.recv(socket, 0)
+
     receive do
+
       {:tcp, _socket, data} -> data
+      data
     end
+
+
   end
 
   defp escribir_caracteres(linea_caracteres, socket) do
+
     :gen_tcp.send(socket, linea_caracteres)
+    Logger.info("Enviando cadena  #{linea_caracteres}" <> "_099890_")
   end
 end
