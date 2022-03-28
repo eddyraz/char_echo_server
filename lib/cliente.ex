@@ -8,6 +8,18 @@ defmodule EchoClient do
 
   require Logger
 
+  def child_spec(_) do
+    %{
+      id: __MODULE__,
+      start: {__MODULE__, :start_link, []},
+      type: :worker
+    }
+  end
+
+  def start_link() do
+    Agent.start_link(fn -> [] end, name: :cliente_tcp)
+  end
+
   def generador_de_cadenas() do
     datos = :crypto.strong_rand_bytes(Enum.random(32..64)) |> Base.encode64(padding: false)
     Logger.info("Enviando cadena #{datos}")
