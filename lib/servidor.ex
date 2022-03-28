@@ -26,7 +26,7 @@ defmodule CharEchoServer do
   defp leer_caracteres(socket) do
     receive do
       {:tcp, _socket, data} ->
-        data
+        Logger.info("Hemos recibido la cadena #{inspect(data)};\r\n\r\n")
         data
     end
   end
