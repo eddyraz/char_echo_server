@@ -32,7 +32,7 @@ defmodule CharEchoServer do
   end
 
   defp escribir_caracteres(linea_caracteres, socket) do
-    :gen_tcp.send(socket, linea_caracteres)
-    Logger.info("Enviando cadena  #{linea_caracteres}" <> "_099890_")
+    :gen_tcp.send(socket, linea_caracteres <> "_0998899_")
+    Logger.info("Enviando cadena  #{linea_caracteres}" <> "_09988990_")
   end
 end

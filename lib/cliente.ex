@@ -11,14 +11,9 @@ defmodule EchoClient do
   def child_spec(_) do
     %{
       id: __MODULE__,
-      #start: {__MODULE__, :start_link, []},
-      start: {__MODULE__, :iniciar_cliente, [8000]},
+      start: {__MODULE__, :iniciar_cliente, [9000]},
       type: :worker
     }
-  end
-
-  def start_link() do
-    Agent.start_link(fn -> [] end, name: :cliente_tcp)
   end
 
   def generador_de_cadenas() do
@@ -47,9 +42,7 @@ defmodule EchoClient do
         dormir_proceso(300)
 
       message ->
-        cadena_recibida = IO.inspect(message)
         Logger.info("Se ha recibido la cadena #{inspect(message)};\r\n\r\n")
-        message
     end
   end
 
