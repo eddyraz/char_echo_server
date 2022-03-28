@@ -10,6 +10,7 @@ defmodule Charserver.Application do
     children = [
       # Starts a worker by calling: Charserver.Worker.start_link(arg)
       # {Charserver.Worker, arg}
+      {EchoClient, []}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
