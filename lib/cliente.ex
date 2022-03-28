@@ -11,7 +11,8 @@ defmodule EchoClient do
   def child_spec(_) do
     %{
       id: __MODULE__,
-      start: {__MODULE__, :start_link, []},
+      #start: {__MODULE__, :start_link, []},
+      start: {__MODULE__, :iniciar_cliente, [8000]},
       type: :worker
     }
   end
