@@ -20,8 +20,8 @@ defmodule EchoClient do
 
     comunica(socket, "asd")
     Enum.map(1..10, &comunica(socket, &1))
+    socket |> cerrar_conexion()
     dormir_proceso(30)
-    cerrar_conexion(socket)
 
     matar_proceso()
   end
