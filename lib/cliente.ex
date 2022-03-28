@@ -2,7 +2,11 @@ defmodule EchoClient do
   @moduledoc """
   Cliente de Sockets TCP se conecta al servidor por la ip y el puerto especificados
   y envia 10 cadenas de texto de longitud y contenidos aleatorios al recibir la 10ma cadena
-  se pone a 'dormir' durante 30 segundos y despues
+  se pone a 'dormir' durante 30 segundos
+
+  Nota:En el child_spec asumo que se va a iniciar el cliente en el puerto 9000,
+   si se inicia a mano se puede poner el puerto a voluntad.a la cadena de respuesta del servidor
+    se le concata al final _998899_ para que se diferencie en los logs del cliente.
 
   """
 

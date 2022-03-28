@@ -1,4 +1,8 @@
 defmodule SupervisorDeProcesos do
+
+  @moduledoc """
+  supervisor de procesos worker(EchoClient)
+  """
   @puerto 9000
 
   def start do
