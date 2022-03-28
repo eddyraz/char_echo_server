@@ -11,7 +11,7 @@ defmodule CharEchoServer do
 
   def aceptar_conexion(puerto) do
     {:ok, socket} =
-      :gen_tcp.listen(puerto, [:binary, packet: :line, active: true, reuseaddr: true])
+      :gen_tcp.listen(puerto, [:binary, packet: :line, active: false, reuseaddr: true])
 
     Logger.info("Estamos aceptando conexiones en el puerto #{puerto}")
     {:ok, cliente} = :gen_tcp.accept(socket)
@@ -19,15 +19,14 @@ defmodule CharEchoServer do
   end
 
   defp servir_socket(socket) do
-    socket |> leer_caracteres()  |> escribir_caracteres(socket)
+    socket |> leer_caracteres() |> escribir_caracteres(socket)
     servir_socket(socket)
   end
 
   defp leer_caracteres(socket) do
-    #{:ok, data} = :gen_tcp.recv(socket, 0)
-    receive do
-      {:tcp, _socket, data} -> data
-    end
+    {:ok, data} = :gen_tcp.recv(socket, 0)
+    IO.puts(data)
+    data
   end
 
   defp escribir_caracteres(linea_caracteres, socket) do

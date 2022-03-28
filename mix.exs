@@ -1,6 +1,4 @@
 defmodule Charserver.MixProject do
-
-
   use Mix.Project
 
   def project do

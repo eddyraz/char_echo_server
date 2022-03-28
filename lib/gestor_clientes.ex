@@ -1,31 +1,21 @@
-defmodule Stack do
+defmodule GestorWorkers do
+  # See https://hexdocs.pm/elixir/Application.html
+  # for more information on OTP Applications
+  @moduledoc false
 
-  @moduledoc """
-  Manejador de los workers(clientes)
-  usa para esto el paradigma de Genserver
-
-
-  recibe las peticiones de terminar los workers,
-  y emite creacion(spawning de nuevos workers)
-
-  """
-
-  use GenServer
-
-  # Callbacks
+  use Application
 
   @impl true
-  def init(stack) do
-    {:ok, stack}
+  def start(_type, _args) do
+    children = [
+      {DynamicSupervisor, strategy: :one_for_one, name: EchoClient},
+    ]
+
+    # See https://hexdocs.pm/elixir/Supervisor.html
+    # for other strategies and supported options
+    opts = [strategy: :one_for_one, name: CharWorkers.Supervisor]
+    Supervisor.start_link(children, opts)
   end
 
-  @impl true
-  def handle_call(:pop, _from, [head | tail]) do
-    {:reply, head, tail}
-  end
 
-  @impl true
-  def handle_cast({:push, element}, state) do
-    {:noreply, [element | state]}
-  end
 end
